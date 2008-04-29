@@ -53,14 +53,14 @@ namespace GitSharp.Core
 		/// A String of a byte array converted to Hexadecimial format<see cref="System.String"/>
 		/// </returns>
 		public static string BytesToHex (byte[] bytes)
-        {
+		{
 			StringBuilder hexString = new StringBuilder (bytes.Length);
 			for (int i = 0; i < bytes.Length; i++) {
 				hexString.Append (bytes [i].ToString ("x2"));
 			}
 			
 			return hexString.ToString ();
-        }
+		}
 		
 		/// <summary>
 		/// Converts the object to a SHA1 bytes array
