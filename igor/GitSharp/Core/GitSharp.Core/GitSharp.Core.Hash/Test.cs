@@ -25,8 +25,6 @@
 //
 //
 
-
-
 using System;
 
 namespace GitSharp.Core
