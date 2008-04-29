@@ -1,0 +1,6 @@
+*.swp
+*.pidb
+*.userprefs
+*.usertasks
+Core/GitSharp.Core/bin
+
