@@ -104,7 +104,7 @@ namespace GitSharp.Core
 			byteHeader.CopyTo (data, 0);
 			byteInput.CopyTo (data, byteHeader.Length);
 			
-			SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider();
+			SHA1 sha1 = SHA1.Create();
 			byte[] result = sha1.ComputeHash (data);
 			
 			return result;
