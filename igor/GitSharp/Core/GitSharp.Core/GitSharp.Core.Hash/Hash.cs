@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
-//
 
 using System;
 using System.Security.Cryptography;
@@ -87,27 +86,27 @@ namespace GitSharp.Core
 		/// </returns>
 		public static byte[] HashFile (string filename)
 		{
-			List<byte> bytes = new List<byte> ();
-			string header;
-			BinaryReader fd = new BinaryReader (File.Open (filename, FileMode.Open));
+			byte[] bytes;
+			byte[] data;
+			byte[] byteHeader;
 			
-			while (fd.PeekChar () != -1)
-				bytes.Add (fd.ReadByte ());
+			FileStream fd = File.OpenRead (filename);
+			BinaryReader reader = new BinaryReader (fd);
 			
-			byte[] byteInput = bytes.ToArray ();
+			bytes = reader.ReadBytes ((int) fd.Length);
 			
-			header = "blob " + (byteInput.Length + 0).ToString () + "\0";
+			// Closing stream and BinaryReader
+			fd.Close ();
+			reader.Close ();
 			
-			byte[] byteHeader = Encoding.ASCII.GetBytes (header);
-			byte[] data = new byte[byteHeader.Length + byteInput.Length];
+			byteHeader = Encoding.Default.GetBytes ("blob " + bytes.Length.ToString () + "\0");
+			
+			data = new byte[byteHeader.Length + bytes.Length];
 			
 			byteHeader.CopyTo (data, 0);
-			byteInput.CopyTo (data, byteHeader.Length);
+			bytes.CopyTo (data, byteHeader.Length);
 			
-			SHA1 sha1 = SHA1.Create();
-			byte[] result = sha1.ComputeHash (data);
-			
-			return result;
+			return SHA1.Create ().ComputeHash (data);
 		}
 		
 		/// <summary>

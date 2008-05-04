@@ -33,7 +33,8 @@ namespace GitSharp.Core
 	{
 		public static void Main (string [] args)
 		{
-			Hash.Test (args);
+			if (args.Length != 0)
+				Hash.Test (args);
 		}
 	}
 }
