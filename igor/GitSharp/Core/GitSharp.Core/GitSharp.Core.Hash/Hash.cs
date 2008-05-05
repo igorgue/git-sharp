@@ -54,8 +54,9 @@ namespace GitSharp.Core
 		public static string BytesToHex (byte[] bytes)
 		{
 			StringBuilder hexString = new StringBuilder (bytes.Length);
-			for (int i = 0; i < bytes.Length; i++) {
-				hexString.Append (bytes [i].ToString ("x2"));
+			
+			foreach (byte b in bytes) {
+				hexString.Append (b.ToString ("x2"));
 			}
 			
 			return hexString.ToString ();
@@ -76,6 +77,39 @@ namespace GitSharp.Core
 		}
 		
 		/// <summary>
+		/// Compute the byte array to a SHA1 hash
+		/// </summary>
+		/// <param name="bytes">
+		/// A byte array to convert<see cref="System.Byte"/>
+		/// </param>
+		/// <returns>
+		/// A SHA1 byte array<see cref="System.Byte"/>
+		/// </returns>
+		public static byte[] ComputeSHA1Hash (byte[] bytes)
+		{
+			return SHA1.Create ().ComputeHash (bytes);
+		}
+		
+		/// <summary>
+		/// Create a header for a Git hash
+		/// </summary>
+		/// <param name="objType">
+		/// Type of the object to hash<see cref="Types"/>
+		/// </param>
+		/// <param name="dataSize">
+		/// Size of the object to hash<see cref="System.Int32"/>
+		/// </param>
+		/// <returns>
+		/// Header<see cref="System.Byte"/>
+		/// </returns>
+		public static byte[] CreateHashHeader (Types objType, int dataSize)
+		{
+			return Encoding.Default.GetBytes (String.Format ("{0} {1}\0",
+			                                                 objType.ToString ().ToLower (),
+			                                                 dataSize.ToString ()));
+		}
+		
+		/// <summary>
 		/// Hash a single file by a given Filename
 		/// </summary>
 		/// <param name="filename">
@@ -88,25 +122,23 @@ namespace GitSharp.Core
 		{
 			byte[] bytes;
 			byte[] data;
-			byte[] byteHeader;
+			byte[] header;
 			
 			FileStream fd = File.OpenRead (filename);
-			BinaryReader reader = new BinaryReader (fd);
 			
-			bytes = reader.ReadBytes ((int) fd.Length);
+			bytes = new BinaryReader (fd).ReadBytes ((int) fd.Length);
 			
-			// Closing stream and BinaryReader
+			// Closing stream
 			fd.Close ();
-			reader.Close ();
 			
-			byteHeader = Encoding.Default.GetBytes ("blob " + bytes.Length.ToString () + "\0");
+			header = CreateHashHeader (Types.Blob, bytes.Length);
 			
-			data = new byte[byteHeader.Length + bytes.Length];
+			data = new byte[header.Length + bytes.Length];
 			
-			byteHeader.CopyTo (data, 0);
-			bytes.CopyTo (data, byteHeader.Length);
+			header.CopyTo (data, 0);
+			bytes.CopyTo (data, header.Length);
 			
-			return SHA1.Create ().ComputeHash (data);
+			return ComputeSHA1Hash (data);
 		}
 		
 		/// <summary>

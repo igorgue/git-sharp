@@ -17,5 +17,7 @@
     <File name="GitSharp.Core.Hash" subtype="Directory" buildaction="Compile" />
     <File name="GitSharp.Core.Hash/Hash.cs" subtype="Code" buildaction="Compile" />
     <File name="GitSharp.Core.Hash/Test.cs" subtype="Code" buildaction="Compile" />
+    <File name="GitSharp.Core.Object" subtype="Directory" buildaction="Compile" />
+    <File name="GitSharp.Core.Object/Object.cs" subtype="Code" buildaction="Compile" />
   </Contents>
 </Project>
