@@ -37,7 +37,9 @@ namespace GitSharp.Core
 	/// Class used to hash an object
 	/// </summary>
 	public class Hash
-	{	
+	{
+		const uint hash_size = 160;
+		
 		public Hash ()
 		{
 		}
@@ -121,7 +123,7 @@ namespace GitSharp.Core
 		public static byte[] HashFile (string filename)
 		{
 			byte[] bytes;
-			byte[] data;
+			byte[] data = new byte [160];
 			byte[] header;
 			
 			FileStream fd = File.OpenRead (filename);
@@ -149,8 +151,7 @@ namespace GitSharp.Core
 		/// </param>
 		public static void Test (string[] args)
 		{
-			string str = BytesToHex (HashFile (args [0]));
-			System.Console.WriteLine (str);
+			System.Console.WriteLine (BytesToHex (HashFile (args [0])));
 		}
 	}
 }
