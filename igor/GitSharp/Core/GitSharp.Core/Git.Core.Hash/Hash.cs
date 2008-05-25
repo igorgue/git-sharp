@@ -31,7 +31,7 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 
-namespace GitSharp.Core
+namespace Mono.Git.Core
 {
 	/// <summary>
 	/// Class used to hash an object

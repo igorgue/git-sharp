@@ -26,7 +26,7 @@
 
 using System;
 
-namespace GitSharp.Core
+namespace Mono.Git.Core
 {
 	/// <summary>
 	/// Contains the object types of Git

@@ -1,4 +1,4 @@
-<Project name="GitSharp.Core" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+<Project name="Git.Core" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assembly="GitSharp.Core" />
@@ -14,10 +14,10 @@
     </Configuration>
   </Configurations>
   <Contents>
-    <File name="GitSharp.Core.Hash" subtype="Directory" buildaction="Compile" />
-    <File name="GitSharp.Core.Hash/Hash.cs" subtype="Code" buildaction="Compile" />
-    <File name="GitSharp.Core.Hash/Test.cs" subtype="Code" buildaction="Compile" />
-    <File name="GitSharp.Core.Object" subtype="Directory" buildaction="Compile" />
-    <File name="GitSharp.Core.Object/Object.cs" subtype="Code" buildaction="Compile" />
+    <File name="Git.Core.Hash" subtype="Directory" buildaction="Compile" />
+    <File name="Git.Core.Hash/Hash.cs" subtype="Code" buildaction="Compile" />
+    <File name="Git.Core.Hash/Test.cs" subtype="Code" buildaction="Compile" />
+    <File name="Git.Core.Object" subtype="Directory" buildaction="Compile" />
+    <File name="Git.Core.Object/Object.cs" subtype="Code" buildaction="Compile" />
   </Contents>
 </Project>

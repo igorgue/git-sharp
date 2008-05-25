@@ -27,7 +27,7 @@
 
 using System;
 
-namespace GitSharp.Core
+namespace Mono.Git.Core
 {
 	public class Test
 	{
