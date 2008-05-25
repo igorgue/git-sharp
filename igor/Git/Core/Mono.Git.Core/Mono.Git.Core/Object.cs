@@ -1,6 +1,6 @@
-// Hash.cs
+// Object.cs
 //
-// Authors:
+// Author:
 //   Hector E. Gomez <hectoregm@gmail.com>
 //   Igor Guerrero Fonseca <igfgt1@gmail.com>
 //
@@ -26,71 +26,64 @@
 //
 
 using System;
-using System.Security.Cryptography;
 using System.IO;
+using System.Security;
 using System.Text;
-using System.Collections.Generic;
 
 namespace Mono.Git.Core
 {
 	/// <summary>
-	/// Class used to hash an object
+	/// Contains the object types of Git
 	/// </summary>
-	public class Hash
+	public enum Types
 	{
-		const uint hash_size = 160;
+		Blob,
+		Tree,
+		Commit,
+		Tag
+	}
+	
+	/// <summary>
+	/// Struct that represent a SHA1 hash
+	/// </summary>
+	public struct SHA1
+	{
+		public byte[] bytes;
+	}
+	
+	/// <summary>
+	/// Class that holds the basic object information
+	/// </summary>
+	public abstract class Object
+	{
+		private SHA1 id;
 		
-		public Hash ()
+		public Object()
 		{
+			id.bytes = new byte[160];
 		}
 		
 		/// <summary>
-		/// Convert a Byte array to Hexadecimal format
+		/// Initialize the Object with a given file path
 		/// </summary>
-		/// <param name="bytes">
-		/// A byte array<see cref="System.Byte"/>
+		/// <param name="objType">
+		/// A type of object<see cref="Type"/>
 		/// </param>
-		/// <returns>
-		/// A String of a byte array converted to Hexadecimial format<see cref="System.String"/>
-		/// </returns>
-		public static string BytesToHex (byte[] bytes)
+		/// <param name="filePath">
+		/// A path represented by a string<see cref="System.String"/>
+		/// </param>
+		public Object (string filePath)
 		{
-			StringBuilder hexString = new StringBuilder (bytes.Length);
-			
-			foreach (byte b in bytes) {
-				hexString.Append (b.ToString ("x2"));
-			}
-			
-			return hexString.ToString ();
+			id.bytes = new byte[160];
+			id.bytes = HashFile (filePath);
 		}
 		
-		/// <summary>
-		/// Converts the object to a SHA1 bytes array
-		/// </summary>
-		/// <param name="data">
-		/// Object to convert<see cref="System.Object"/>
-		/// </param>
-		/// <returns>
-		/// A byte array to return<see cref="System.Byte"/>
-		/// </returns>
-		public static byte[] HashObject (object data)
+		public string ToHexString ()
 		{
-			throw new NotImplementedException("HashObject (object data) is not implemented");
+			return BytesToHexString (id.bytes);
 		}
 		
-		/// <summary>
-		/// Compute the byte array to a SHA1 hash
-		/// </summary>
-		/// <param name="bytes">
-		/// A byte array to convert<see cref="System.Byte"/>
-		/// </param>
-		/// <returns>
-		/// A SHA1 byte array<see cref="System.Byte"/>
-		/// </returns>
-		public static byte[] ComputeSHA1Hash (byte[] bytes)
-		{
-			return SHA1.Create ().ComputeHash (bytes);
-		}
+		// Static helper functions
 		
 		/// <summary>
 		/// Create a header for a Git hash
@@ -109,6 +102,40 @@ namespace Mono.Git.Core
 			return Encoding.Default.GetBytes (String.Format ("{0} {1}\0",
 			                                                 objType.ToString ().ToLower (),
 			                                                 dataSize.ToString ()));
+		}
+		
+		/// <summary>
+		/// Convert a Byte array to Hexadecimal format
+		/// </summary>
+		/// <param name="bytes">
+		/// A byte array<see cref="System.Byte"/>
+		/// </param>
+		/// <returns>
+		/// A String of a byte array converted to Hexadecimial format<see cref="System.String"/>
+		/// </returns>
+		public static string BytesToHexString (byte[] bytes)
+		{
+			StringBuilder hexString = new StringBuilder (bytes.Length);
+			
+			foreach (byte b in bytes) {
+				hexString.Append (b.ToString ("x2"));
+			}
+			
+			return hexString.ToString ();
+		}
+		
+		/// <summary>
+		/// Compute the byte array to a SHA1 hash
+		/// </summary>
+		/// <param name="bytes">
+		/// A byte array to convert<see cref="System.Byte"/>
+		/// </param>
+		/// <returns>
+		/// A SHA1 byte array<see cref="System.Byte"/>
+		/// </returns>
+		public static byte[] ComputeSHA1Hash (byte[] bytes)
+		{
+			return System.Security.Cryptography.SHA1.Create ().ComputeHash (bytes);
 		}
 		
 		/// <summary>
@@ -141,17 +168,6 @@ namespace Mono.Git.Core
 			bytes.CopyTo (data, header.Length);
 			
 			return ComputeSHA1Hash (data);
-		}
-		
-		/// <summary>
-		/// A method to test the hash generation
-		/// </summary>
-		/// <param name="args">
-		/// Filename to convert<see cref="System.String"/>
-		/// </param>
-		public static void Test (string[] args)
-		{
-			System.Console.WriteLine (BytesToHex (HashFile (args [0])));
 		}
 	}
 }

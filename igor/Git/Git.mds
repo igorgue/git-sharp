@@ -1,4 +1,4 @@
-<Combine name="GitSharp" fileversion="2.0">
+<Combine name="Git" fileversion="2.0">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="Core" configuration="Debug" />
@@ -7,7 +7,7 @@
       <Entry build="True" name="Core" configuration="Release" />
     </Configuration>
   </Configurations>
-  <StartMode startupentry="Core" single="True">
+  <StartMode startupentry="Git" single="True">
     <Execute type="None" entry="Core" />
   </StartMode>
   <Entries>
