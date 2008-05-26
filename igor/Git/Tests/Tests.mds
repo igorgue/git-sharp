@@ -1,20 +1,16 @@
-<Combine name="Git" fileversion="2.0">
+<Combine name="Tests" fileversion="2.0">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
-      <Entry build="True" name="Core" configuration="Debug" />
       <Entry build="True" name="Tests" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
-      <Entry build="True" name="Core" configuration="Release" />
       <Entry build="True" name="Tests" configuration="Release" />
     </Configuration>
   </Configurations>
-  <StartMode startupentry="Git" single="True">
-    <Execute type="None" entry="Core" />
+  <StartMode startupentry="Tests" single="True">
     <Execute type="None" entry="Tests" />
   </StartMode>
   <Entries>
-    <Entry filename="Core/Core.mds" />
-    <Entry filename="Tests/Tests.mds" />
+    <Entry filename="Tests.mdp" />
   </Entries>
 </Combine>

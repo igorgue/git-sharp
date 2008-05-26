@@ -59,6 +59,24 @@ namespace Mono.Git.Core
 		protected SHA1 id;
 		protected Type type;
 		
+		public Type Type {
+			get {
+				return type;
+			}
+			set {
+				type = value;
+			}
+		}
+		
+		public SHA1 Id {
+			get {
+				return id;
+			}
+			set {
+				id = value;
+			}
+		}
+		
 		public Object(Type t)
 		{
 			id.bytes = new byte[160];
