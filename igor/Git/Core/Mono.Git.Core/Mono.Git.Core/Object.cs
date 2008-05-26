@@ -1,6 +1,6 @@
 // Object.cs
 //
-// Author:
+// Authors:
 //   Hector E. Gomez <hectoregm@gmail.com>
 //   Igor Guerrero Fonseca <igfgt1@gmail.com>
 //
@@ -35,7 +35,7 @@ namespace Mono.Git.Core
 	/// <summary>
 	/// Contains the object types of Git
 	/// </summary>
-	public enum Types
+	public enum Type
 	{
 		Blob,
 		Tree,
@@ -56,26 +56,13 @@ namespace Mono.Git.Core
 	/// </summary>
 	public abstract class Object
 	{
-		private SHA1 id;
+		protected SHA1 id;
+		protected Type type;
 		
-		public Object()
+		public Object(Type t)
 		{
 			id.bytes = new byte[160];
-		}
-		
-		/// <summary>
-		/// Initialize the Object with a given file path
-		/// </summary>
-		/// <param name="objType">
-		/// A type of object<see cref="Type"/>
-		/// </param>
-		/// <param name="filePath">
-		/// A path represented by a string<see cref="System.String"/>
-		/// </param>
-		public Object (string filePath)
-		{
-			id.bytes = new byte[160];
-			id.bytes = HashFile (filePath);
+			type = t;
 		}
 		
 		public string ToHexString ()
@@ -89,7 +76,7 @@ namespace Mono.Git.Core
 		/// Create a header for a Git hash
 		/// </summary>
 		/// <param name="objType">
-		/// Type of the object to hash<see cref="Types"/>
+		/// Type of the object to hash<see cref="Type"/>
 		/// </param>
 		/// <param name="dataSize">
 		/// Size of the object to hash<see cref="System.Int32"/>
@@ -97,7 +84,7 @@ namespace Mono.Git.Core
 		/// <returns>
 		/// Header<see cref="System.Byte"/>
 		/// </returns>
-		public static byte[] CreateHashHeader (Types objType, int dataSize)
+		public static byte[] CreateHashHeader (Type objType, int dataSize)
 		{
 			return Encoding.Default.GetBytes (String.Format ("{0} {1}\0",
 			                                                 objType.ToString ().ToLower (),
@@ -147,7 +134,7 @@ namespace Mono.Git.Core
 		/// <returns>
 		/// A sha1 hash<see cref="System.Byte"/>
 		/// </returns>
-		public static byte[] HashFile (string filename)
+		public static byte[] HashFile (Type objType, string filename)
 		{
 			byte[] bytes;
 			byte[] data = new byte [160];
@@ -160,7 +147,7 @@ namespace Mono.Git.Core
 			// Closing stream
 			fd.Close ();
 			
-			header = CreateHashHeader (Types.Blob, bytes.Length);
+			header = CreateHashHeader (objType, bytes.Length);
 			
 			data = new byte[header.Length + bytes.Length];
 			
