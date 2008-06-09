@@ -25,6 +25,7 @@
 //
 
 using System;
+using System.IO;
 
 namespace Mono.Git.Core
 {
@@ -33,6 +34,18 @@ namespace Mono.Git.Core
 	/// </summary>
 	public class Blob : Object
 	{
+		private byte[] content;
+		
+		public byte[] Content
+		{
+			get {
+				return content;
+			}
+			set {
+				content = value;
+			}
+		}
+		
 		/// <summary>
 		/// Initialize the object type and the bytes
 		/// </summary>
@@ -52,6 +65,13 @@ namespace Mono.Git.Core
 		public Blob (string filePath) : base (Type.Blob)
 		{
 			id.bytes = HashFile (type, filePath);
+			AddContent (filePath);
+		}
+		
+		public void AddContent (string filePath) {
+			FileStream f = File.Open (filePath, FileMode.Open);
+			
+			content = new BinaryReader (f).ReadBytes ();
 		}
 	}
 }
