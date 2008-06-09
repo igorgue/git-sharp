@@ -68,10 +68,36 @@ namespace Mono.Git.Core
 			AddContent (filePath);
 		}
 		
-		public void AddContent (string filePath) {
+		public void AddContent (string filePath)
+		{
 			FileStream f = File.Open (filePath, FileMode.Open);
 			
-			content = new BinaryReader (f).ReadBytes ();
+			content = new BinaryReader (f).ReadBytes ((int) f.Length);
+			
+			f.Close ();
+		}
+		
+		/// <summary>
+		/// TODO: Test, remove this please later
+		/// </summary>
+		/// <param name="filePath">
+		/// A <see cref="System.String"/>
+		/// </param>
+		public static void Write (string filePath)
+		{
+			Blob b = new Blob (filePath);
+			b.AddContent (filePath);
+			
+			FileStream f = new FileStream (b.ToHexString (), FileMode.Create);
+			
+			byte[] bytesHeader;
+			bytesHeader = Object.CreateHashHeader (Mono.Git.Core.Type.Blob, b.Content.Length);
+			
+			f.Write (bytesHeader, 0, bytesHeader.Length);
+			
+			
+			
+			f.Close ();
 		}
 	}
 }

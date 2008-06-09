@@ -32,7 +32,8 @@ namespace Mono.Git.Tests
 	{
 		public static void Main (string[] args)
 		{
-			new ObjectTest ();
+			//new ObjectTest ();
+			new BlobTest ();
 		}
 	}
 }

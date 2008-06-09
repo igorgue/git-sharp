@@ -33,6 +33,12 @@ namespace Mono.Git.Core
 	/// </summary>
 	public class Commit : Object
 	{
+		private SHA1 parent;
+		private SHA1 tree;
+		private string author;
+		private string commiter;
+		private string message;
+		
 		public Commit () : base (Type.Commit)
 		{
 		}

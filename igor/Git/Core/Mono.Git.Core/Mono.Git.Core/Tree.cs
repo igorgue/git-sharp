@@ -33,6 +33,8 @@ namespace Mono.Git.Core
 	/// </summary>
 	public class Tree : Object
 	{
+		private SHA1 parent;
+		
 		public Tree () : base (Type.Tree)
 		{
 		}

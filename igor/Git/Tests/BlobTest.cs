@@ -1,4 +1,4 @@
-// Tag.cs
+// BlobTest.cs
 //
 // Author:
 //   Igor Guerrero Fonseca <igfgt1@gmail.com>
@@ -23,22 +23,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
+//
 
 using System;
 
-namespace Mono.Git.Core
+using Mono.Git.Core;
+
+namespace Mono.Git.Tests
 {
-	/// <summary>
-	/// A class that holds all the tag information
-	/// </summary>
-	public class Tag : Object
+	public class BlobTest
 	{
-		private string tag;
-		private string tagger;
-		private string message;
-		
-		public Tag () : base (Type.Tag)
+		public BlobTest()
 		{
+			Blob.Write ("hello.txt");
 		}
 	}
 }
