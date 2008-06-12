@@ -26,6 +26,7 @@
 
 using System;
 using System.IO;
+using System.IO.Compression;
 
 namespace Mono.Git.Core
 {
@@ -89,13 +90,32 @@ namespace Mono.Git.Core
 			b.AddContent (filePath);
 			
 			FileStream f = new FileStream (b.ToHexString (), FileMode.Create);
+			//FileStream f = new FileStream ("hello.object", FileMode.Create);
 			
 			byte[] bytesHeader;
 			bytesHeader = Object.CreateHashHeader (Mono.Git.Core.Type.Blob, b.Content.Length);
 			
-			f.Write (bytesHeader, 0, bytesHeader.Length);
+			//f.Write (bytesHeader, 0, bytesHeader.Length);
 			
+			// Reading the file content
+			FileStream st = new FileStream (filePath, FileMode.Open);
+			FileInfo fileInfo = new FileInfo (filePath);
+			BinaryReader br = new BinaryReader (st);
 			
+			byte[] data = new byte[bytesHeader.Length + fileInfo.Length];
+			bytesHeader.CopyTo (data, 0); 
+			br.ReadBytes (Convert.ToInt32 (fileInfo.Length.ToString ())).CopyTo (data, bytesHeader.Length);
+			
+			//f.Write (data, 0, data.Length);
+			
+			MemoryStream ms = new MemoryStream ();
+			DeflateStream ds = new DeflateStream (ms, CompressionMode.Compress, true);
+			ds.Write (data, 0, data.Length);
+			ds.Close ();
+			
+			Console.WriteLine ("Original size {0}, Compressed size {1}", data.Length, ms.Length);
+			
+			f.Write (ms.GetBuffer (), 0, ms.GetBuffer ().Length);
 			
 			f.Close ();
 		}
