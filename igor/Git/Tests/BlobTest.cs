@@ -33,9 +33,9 @@ namespace Mono.Git.Tests
 {
 	public class BlobTest
 	{
-		public BlobTest()
+		public BlobTest(string path)
 		{
-			Blob.Write ("hello.txt");
+			Blob.Read (path);
 		}
 	}
 }

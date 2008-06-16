@@ -119,5 +119,21 @@ namespace Mono.Git.Core
 			
 			f.Close ();
 		}
+		
+		/// <summary>
+		/// TODO: This is a test only
+		/// </summary>
+		/// <param name="filePath">
+		/// A <see cref="System.String"/>
+		/// </param>
+		public static void Read (string filePath)
+		{
+			FileStream fs = new FileStream (filePath, FileMode.Open);
+			BinaryReader br = new BinaryReader (fs);
+			
+			byte[] data = br.ReadBytes (Convert.ToInt32 (fs.Length));
+			
+			Console.WriteLine (Object.BytesToString (data));
+		}
 	}
 }

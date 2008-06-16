@@ -26,7 +26,9 @@
 //
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Security;
 using System.Text;
 
@@ -118,15 +120,35 @@ namespace Mono.Git.Core
 		/// <returns>
 		/// A String of a byte array converted to Hexadecimial format<see cref="System.String"/>
 		/// </returns>
-		public static string BytesToHexString (byte[] bytes)
+		public static string BytesToHexString (byte[] data)
 		{
-			StringBuilder hexString = new StringBuilder (bytes.Length);
+			StringBuilder hexString = new StringBuilder (data.Length);
 			
-			foreach (byte b in bytes) {
+			foreach (byte b in data) {
 				hexString.Append (b.ToString ("x2"));
 			}
 			
 			return hexString.ToString ();
+		}
+		
+		/// <summary>
+		/// Convert a Byte array to string
+		/// </summary>
+		/// <param name="bytes">
+		/// A byte array<see cref="System.Byte"/>
+		/// </param>
+		/// <returns>
+		/// A String of a byte array converted to String format<see cref="System.String"/>
+		/// </returns>
+		public static string BytesToString (byte[] data)
+		{
+			StringBuilder str = new StringBuilder (data.Length);
+			
+			foreach (byte b in data) {
+				str.Append (b.ToString ());
+			}
+			
+			return str.ToString ();
 		}
 		
 		/// <summary>
@@ -173,6 +195,69 @@ namespace Mono.Git.Core
 			bytes.CopyTo (data, header.Length);
 			
 			return ComputeSHA1Hash (data);
+		}
+		
+		/// <summary>
+		/// Compress a byte array
+		/// </summary>
+		/// <param name="data">
+		/// A data byte array<see cref="System.Byte"/>
+		/// </param>
+		/// <returns>
+		/// A compressed byte array<see cref="System.Byte"/>
+		/// </returns>
+		public static byte[] Compress (byte[] data)
+		{
+			MemoryStream ms = new MemoryStream ();
+			DeflateStream ds = new DeflateStream (ms, CompressionMode.Compress);
+			
+			ds.Write (data, 0, data.Length);
+			ds.Flush ();
+			ds.Close ();
+			
+			return ms.ToArray ();
+		}
+		
+		/// <summary>
+		/// Decompress a byte array
+		/// </summary>
+		/// <param name="data">
+		/// A data byte array<see cref="System.Byte"/>
+		/// </param>
+		/// <returns>
+		/// A decompressed byte array<see cref="System.Byte"/>
+		/// </returns>
+		public static byte[] Decompress(byte[] data)
+		{
+			const int BUFFER_SIZE = 256;
+			byte[] tempArray = new byte[BUFFER_SIZE];
+			List<byte[]> tempList = new List<byte[]>();
+			int count = 0, length = 0;
+			
+			MemoryStream ms = new MemoryStream (data);
+			DeflateStream ds = new DeflateStream (ms, CompressionMode.Decompress);
+			
+			while ((count = ds.Read (tempArray, 0, BUFFER_SIZE)) > 0) {
+				if (count == BUFFER_SIZE) {
+					tempList.Add (tempArray);
+					tempArray = new byte[BUFFER_SIZE];
+				} else {
+					byte[] temp = new byte[count];
+					Array.Copy (tempArray, 0, temp, 0, count);
+					tempList.Add (temp);
+				}
+				length += count;
+			}
+			
+			byte[] retVal = new byte[length];
+			
+			count = 0;
+			foreach (byte[] temp in tempList) {
+				Array.Copy (temp, 0, retVal, count, temp.Length);
+				count += temp.Length;
+			}
+			
+			return retVal;
 		}
 	}
 }
