@@ -21,6 +21,7 @@
     <File name="Mono.Git.Core/Tree.cs" subtype="Code" buildaction="Compile" />
     <File name="Mono.Git.Core/Commit.cs" subtype="Code" buildaction="Compile" />
     <File name="Mono.Git.Core/Tag.cs" subtype="Code" buildaction="Compile" />
+    <File name="Mono.Git.Core/TreeEntry.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

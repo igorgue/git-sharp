@@ -1,0 +1,16 @@
+<Combine name="Repository" fileversion="2.0">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="Mono.Git.Repository" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="Mono.Git.Repository" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="Mono.Git.Repository" single="True">
+    <Execute type="None" entry="Mono.Git.Repository" />
+  </StartMode>
+  <Entries>
+    <Entry filename="Mono.Git.Repository/Mono.Git.Repository.mdp" />
+  </Entries>
+</Combine>
