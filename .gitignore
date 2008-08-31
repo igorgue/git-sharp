@@ -1,0 +1,5 @@
+*.dll
+*.log
+*.exe
+*.pidb
+.svn

@@ -1,0 +1,41 @@
+<Project name="Mono.Git.Core" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Debug" assembly="Mono.Git.Core" />
+      <Build debugmode="False" target="Library" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="False" unsafecodeallowed="True" generateoverflowchecks="False" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Release" assembly="Mono.Git.Core" />
+      <Build debugmode="False" target="Library" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="False" unsafecodeallowed="False" generateoverflowchecks="False" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="." subtype="Directory" buildaction="Compile" />
+    <File name="Mono.Git.Core" subtype="Directory" buildaction="Compile" />
+    <File name="Mono.Git.Core/Object.cs" subtype="Code" buildaction="Compile" />
+    <File name="Mono.Git.Core/Blob.cs" subtype="Code" buildaction="Compile" />
+    <File name="Mono.Git.Core/Tree.cs" subtype="Code" buildaction="Compile" />
+    <File name="Mono.Git.Core/Commit.cs" subtype="Code" buildaction="Compile" />
+    <File name="Mono.Git.Core/Tag.cs" subtype="Code" buildaction="Compile" />
+    <File name="Mono.Git.Core/TreeEntry.cs" subtype="Code" buildaction="Compile" />
+    <File name="Mono.Git.Core/GitFileMode.cs" subtype="Code" buildaction="Compile" />
+    <File name="Mono.Git.Core/Revision.cs" subtype="Code" buildaction="Compile" />
+    <File name="Mono.Git.Core.Repository" subtype="Directory" buildaction="Compile" />
+    <File name="Mono.Git.Core.Repository/Configuration.cs" subtype="Code" buildaction="Compile" />
+    <File name="Mono.Git.Core.Repository/IConfiguration.cs" subtype="Code" buildaction="Compile" />
+    <File name="Mono.Git.Core.Repository/Ref.cs" subtype="Code" buildaction="Compile" />
+    <File name="Mono.Git.Core/User.cs" subtype="Code" buildaction="Compile" />
+    <File name="Mono.Git.Core.Repository/ConfigValue.cs" subtype="Code" buildaction="Compile" />
+    <File name="Mono.Git.Core/SHA1.cs" subtype="Code" buildaction="Compile" />
+    <File name="Mono.Git.Core/ObjectStore.cs" subtype="Code" buildaction="Compile" />
+    <File name="Mono.Git.Core/Diff.cs" subtype="Code" buildaction="Compile" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  </References>
+  <GtkDesignInfo gtkVersion="2.12.1" />
+</Project>

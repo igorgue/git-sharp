@@ -1,0 +1,32 @@
+<Project name="Tests" fileversion="2.0" DefaultNamespace="Mono.Git.Tests" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Debug" assembly="Tests" />
+      <Build debugmode="False" target="Exe" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="False" unsafecodeallowed="False" generateoverflowchecks="False" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Release" assembly="Tests" />
+      <Build debugmode="False" target="Exe" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="False" unsafecodeallowed="False" generateoverflowchecks="False" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="Main.cs" subtype="Code" buildaction="Compile" />
+    <File name="AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="ObjectTest.cs" subtype="Code" buildaction="Compile" />
+    <File name="res/hello.txt" subtype="Code" buildaction="FileCopy" />
+    <File name="BlobTest.cs" subtype="Code" buildaction="Compile" />
+    <File name="RepositoryTest.cs" subtype="Code" buildaction="Compile" />
+    <File name="res/config" subtype="Code" buildaction="FileCopy" />
+    <File name="IndexTest.cs" subtype="Code" buildaction="Compile" />
+    <File name="TestDiff.cs" subtype="Code" buildaction="Compile" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Project" localcopy="True" refto="Mono.Git.Core" />
+  </References>
+  <GtkDesignInfo gtkVersion="2.12.1" />
+</Project>
