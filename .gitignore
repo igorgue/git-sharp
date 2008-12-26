@@ -3,3 +3,5 @@
 *.exe
 *.pidb
 .svn
+*.userprefs
+*.usertasks
