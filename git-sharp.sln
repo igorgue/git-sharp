@@ -21,8 +21,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2EA32333
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.Git.Tests", "tests\Mono.Git.Tests\Mono.Git.Tests.csproj", "{861BEEB7-B0C5-4F85-82D9-65CB66451CFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "git-sharp", "git-sharp.csproj", "{69F2795F-03D2-42CD-8A98-B4DE44CCCE1C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
