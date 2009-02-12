@@ -29,7 +29,7 @@ using System.Collections;
 using System.IO;
 using System.Text;
 
-namespace Mono.Git.Core.Repository
+namespace Git.Repository
 {
 	/// <summary>
 	/// It holds all the user configuration

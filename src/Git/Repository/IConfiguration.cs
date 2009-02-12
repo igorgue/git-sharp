@@ -26,7 +26,7 @@
 
 using System;
 
-namespace Mono.Git.Core.Repository
+namespace Git.Repository
 {
 	/// <summary>
 	/// Holds default configuration variables

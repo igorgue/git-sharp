@@ -28,9 +28,8 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
-using Mono.Git.Core.Repository;
 
-namespace Mono.Git.Core
+namespace Git.Core
 {
 	/// <summary>
 	/// Class that store a Blob

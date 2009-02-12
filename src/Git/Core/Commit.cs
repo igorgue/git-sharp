@@ -26,9 +26,8 @@
 
 using System;
 using System.Text;
-using Mono.Git.Core.Repository;
 
-namespace Mono.Git.Core
+namespace Git.Core
 {
 	/// <summary>
 	/// 

@@ -28,9 +28,8 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Text;
-using Mono.Git.Core.Repository;
 
-namespace Mono.Git.Core
+namespace Git.Core
 {
 	/// <summary>
 	/// Merge stage enumeration
@@ -198,7 +197,7 @@ namespace Mono.Git.Core
 			Console.WriteLine (br.ReadInt32 ());
 			
 			// SHA1 5x32 = 160
-			//??? Console.WriteLine (Mono.Git.Core.Object.BytesToHexString (br.ReadBytes (20)));
+			//??? Console.WriteLine (Git.Core.Object.BytesToHexString (br.ReadBytes (20)));
 			Console.WriteLine (br.ReadInt32 ());
 			Console.WriteLine (br.ReadInt32 ());
 			Console.WriteLine (br.ReadInt32 ());

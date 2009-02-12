@@ -26,10 +26,10 @@
 
 using System;
 using System.Text;
-using Mono.Git.Core;
-using Mono.Git.Core.Repository;
+using Git.Core;
+using Git.Repository;
 
-namespace Mono.Git.Core
+namespace Git.Core
 {
 	/// <summary>
 	/// Every Tree has entries, which are more trees and blobs, this is a

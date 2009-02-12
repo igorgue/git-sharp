@@ -26,7 +26,7 @@
 
 using System;
 
-namespace Mono.Git.Tests
+namespace Git.Tests
 {
 	class MainClass
 	{

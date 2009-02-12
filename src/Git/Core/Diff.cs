@@ -30,7 +30,7 @@ using System.Collections;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Mono.Git.Core
+namespace Git.Core
 {
 	public static class Diff {
 		public struct Item {

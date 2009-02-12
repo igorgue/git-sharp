@@ -26,7 +26,7 @@
 
 using System;
 
-namespace Mono.Git.Core
+namespace Git.Core
 {
 	public class IndexEntry
 	{

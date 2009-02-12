@@ -25,9 +25,9 @@
 //
 
 using System;
-using Mono.Git.Core;
+using Git.Core;
 
-namespace Mono.Git.Tests
+namespace Git.Tests
 {
 	public static class TestDiff
 	{

@@ -33,7 +33,7 @@ using System.Collections.Generic;
 using System.Security;
 using System.Text;
 
-namespace Mono.Git.Core
+namespace Git.Core
 {
 	/// <summary>
 	/// Contains the object types of Git
@@ -387,20 +387,20 @@ namespace Mono.Git.Core
 		{
 			switch (type) {
 			case "blob":
-				return Mono.Git.Core.Type.Blob;
+				return Git.Core.Type.Blob;
 				break;
 			case "tree":
-				return Mono.Git.Core.Type.Tree;
+				return Git.Core.Type.Tree;
 				break;
 			case "commit":
-				return Mono.Git.Core.Type.Commit;
+				return Git.Core.Type.Commit;
 				break;
 			case "tag":
-				return Mono.Git.Core.Type.Tag;
+				return Git.Core.Type.Tag;
 				break;
 			}
 			
-			return Mono.Git.Core.Type.Blob;
+			return Git.Core.Type.Blob;
 		}
 		
 		public static Object DecodeObject (byte[] content)

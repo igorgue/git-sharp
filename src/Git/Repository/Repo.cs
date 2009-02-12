@@ -27,7 +27,7 @@
 using System;
 using System.IO;
 
-namespace Mono.Git.Core.Repository
+namespace Git.Repository
 {
 	/// <summary>
 	/// It represent all the repository data

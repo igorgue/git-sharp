@@ -28,9 +28,9 @@ using System;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
-using Mono.Git.Core;
+using Git.Core;
 
-namespace Mono.Git.Core
+namespace Git.Core
 {
 	/// <summary>
 	/// A class that stores a tree of a commit

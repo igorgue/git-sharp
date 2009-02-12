@@ -28,9 +28,9 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
-using Mono.Git.Core;
+using Git.Core;
 
-namespace Mono.Git.Tests
+namespace Git.Tests
 {
 	/// <summary>
 	/// Here we will store all the tests, this is temporal I believe it'll better
@@ -60,7 +60,7 @@ namespace Mono.Git.Tests
 		public static bool CreateBlobHashTest ()
 		{
 			//Blob b = new Blob ("hello.txt");
-			//string hash = Mono.Git.Core.Object.BytesToHexString (b.Id.bytes);
+			//string hash = Git.Core.Object.BytesToHexString (b.Id.bytes);
 			
 			//if (hash != "7ca7efe6dbed6a3a0d73030134521c8b1048e6a7")
 			//	return false;
@@ -114,7 +114,7 @@ namespace Mono.Git.Tests
 //			for (int i = 2; i < len; i++)
 //				dContent[i - 2] = content[i];
 			
-			byte[] deflated = Mono.Git.Core.ObjectStore.Decompress (content);
+			byte[] deflated = Git.Core.ObjectStore.Decompress (content);
 			
 			int pos = 0;
 			
@@ -124,7 +124,7 @@ namespace Mono.Git.Tests
 			
 			Array.Copy (deflated, pos, deflatedNoHeader, 0, deflatedNoHeader.Length);
 			
-			Blob blob = (Blob) Mono.Git.Core.Object.DecodeObject (deflated);
+			Blob blob = (Blob) Git.Core.Object.DecodeObject (deflated);
 			
 			Console.WriteLine ("Read from Blob(Object):");
 			Console.WriteLine ("Length: {0}", blob.Content.Length);
@@ -167,7 +167,7 @@ namespace Mono.Git.Tests
 			Console.WriteLine ("Last 4 bytes: {0}{1}{2}{3}", (int)content[len - 4], (int)content[len - 3], 
 			                   (int)content[len - 2], (int)content[len - 1]);
 			
-			byte[] deflated = Mono.Git.Core.ObjectStore.Decompress (content);
+			byte[] deflated = Git.Core.ObjectStore.Decompress (content);
 			
 			int pos = 0;
 			

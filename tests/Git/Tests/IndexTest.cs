@@ -26,9 +26,9 @@
 
 using System;
 using System.IO;
-using Mono.Git.Core;
+using Git.Core;
 
-namespace Mono.Git.Tests
+namespace Git.Tests
 {
 	
 	
@@ -65,8 +65,8 @@ namespace Mono.Git.Tests
 			Console.WriteLine (br.ReadInt32 ());
 			
 			// SHA1 5x32 = 160
-			//??? Console.WriteLine (Mono.Git.Core.Object.BytesToHexString (br.ReadBytes (160)));
-			//Console.WriteLine (Mono.Git.Core.SHA1.BytesToHexString (br.ReadBytes (20)));
+			//??? Console.WriteLine (Git.Core.Object.BytesToHexString (br.ReadBytes (160)));
+			//Console.WriteLine (Git.Core.SHA1.BytesToHexString (br.ReadBytes (20)));
 //			Console.WriteLine (br.ReadInt32 ());
 //			Console.WriteLine (br.ReadInt32 ());
 //			Console.WriteLine (br.ReadInt32 ());

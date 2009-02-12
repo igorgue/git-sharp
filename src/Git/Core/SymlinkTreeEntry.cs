@@ -27,7 +27,7 @@
 using System;
 using System.Text;
 
-namespace Mono.Git.Core
+namespace Git.Core
 {
 	public class SymlinkTreeEntry : TreeEntry
 	{

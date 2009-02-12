@@ -27,7 +27,7 @@
 using System;
 using System.Text;
 
-namespace Mono.Git.Core
+namespace Git.Core
 {
 	/// <summary>
 	/// A class that holds all the tag information

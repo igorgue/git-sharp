@@ -27,7 +27,7 @@
 using System;
 using System.IO;
 
-namespace Mono.Git.Core
+namespace Git.Core
 {
 	public class IndexHeader
 	{

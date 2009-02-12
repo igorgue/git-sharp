@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 
-namespace Mono.Git.Core
+namespace Git.Core
 {
 	/// <summary>
 	/// This class has all the information about the object store tipicaly

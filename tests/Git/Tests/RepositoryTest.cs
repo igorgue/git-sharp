@@ -25,9 +25,9 @@
 //
 
 using System;
-using Mono.Git.Core.Repository;
+using Git.Repository;
 
-namespace Mono.Git.Tests
+namespace Git.Tests
 {
 	/// <summary>
 	/// Repository related tests

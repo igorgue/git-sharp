@@ -27,7 +27,7 @@
 using System;
 using System.IO;
 
-namespace Mono.Git.Core
+namespace Git.Core
 {
 	/// <summary>
 	/// Enumeration with all the file modes that git handles
