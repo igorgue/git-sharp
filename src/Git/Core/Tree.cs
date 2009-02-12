@@ -153,15 +153,15 @@ namespace Git.Core
 		/// <returns>
 		/// A <see cref="System.Boolean"/>
 		/// </returns>
-		protected static bool IsLastChild (Tree tree, ObjectStore store)
-		{
-			foreach (TreeEntry entry in tree.Entries) {
-				if (store.Get (entry.Id).Type == Type.Tree)
-					return false;
-			}
-			
-			return true;
-		}
+//		protected static bool IsLastChild (Tree tree, ObjectStore store)
+//		{
+//			foreach (TreeEntry entry in tree.Entries) {
+//				if (store.Get (entry.Id).Type == Type.Tree)
+//					return false;
+//			}
+//			
+//			return true;
+//		}
 		
 		public override string ToString ()
 		{

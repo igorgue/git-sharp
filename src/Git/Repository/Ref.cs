@@ -28,8 +28,6 @@ using System;
 
 namespace Git.Repository
 {
-	
-	
 	public class Ref
 	{
 		public Ref ()

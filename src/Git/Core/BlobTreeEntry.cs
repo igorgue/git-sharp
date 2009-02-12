@@ -39,14 +39,7 @@ namespace Git.Core
 			SetExecutable (exec);
 		}
 		
-		public GitFileMode Mode {
-			set {
-				mode = value;
-			}
-			get {
-				return mode;
-			}
-		}
+		public GitFileMode Mode { set; get; }
 		
 		public void SetExecutable (bool setExec)
 		{

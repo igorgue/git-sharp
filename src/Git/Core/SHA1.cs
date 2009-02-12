@@ -43,15 +43,20 @@ namespace Git.Core
 		{
 			if (calculateHash) {
 				bytes = ComputeSHA1Hash (data);
-			} else if (data.Length == 20) {
-				bytes = data;
-			} else {
-				throw new ArgumentException ("The data provided is not a SHA1 hash");
+				return;
 			}
+			
+			if (data.Length == 20) {
+				bytes = data;
+				return;
+			}
+			
+			throw new ArgumentException (String.Format ("The data provided is not a SHA1 hash, the lenght was {0} and it has to be 20", data.Length));
 		}
 		
 		public override int GetHashCode ()
 		{
+			// weird maths :S
 			return ((int)bytes[0]) | (((int)bytes[1]) << 8) | (((int)bytes[2]) << 16) | (((int)bytes[3]) << 24);
 		}
 		
@@ -104,7 +109,7 @@ namespace Git.Core
 			return bytes.Equals (o.Bytes);
 		}
 		
-		private static byte FromHexChar (char c) 
+		private static byte ToByte (char c) 
 		{
 			if ((c >= 'a') && (c <= 'f'))
 				return (byte) (c - 'a' + 10);
@@ -112,22 +117,25 @@ namespace Git.Core
 				return (byte) (c - 'A' + 10);
 			if ((c >= '0') && (c <= '9'))
 				return (byte) (c - '0');
+			
 			throw new ArgumentException ("Invalid hex char");
 		}
 		
-		public static byte[] FromHexString (string hex) 
+		public static byte[] ToBytes (string hex) 
 		{
-			if (hex == null)
-				return null;
+			if (String.IsNullOrEmpty (hex))
+				throw new ArgumentException ("A null or empty string was passed, can't convert that to bytes");
 			if ((hex.Length & 0x1) == 0x1)
-				throw new ArgumentException ("Length must be a multiple of 2");
+				throw new ArgumentException ("The Length must be a multiple of 2");
 			
 			byte[] result = new byte [hex.Length >> 1];
 			int n = 0;
 			int i = 0;
+			
+			// TODO: needs optimization
 			while (n < result.Length) {
-				result [n] = (byte) (FromHexChar (hex [i++]) << 4);
-				result [n++] += FromHexChar (hex [i++]);
+				result [n] = (byte) (ToByte (hex [i++]) << 4);
+				result [n++] += ToByte (hex [i++]);
 			}
 			return result;
 		}

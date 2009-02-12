@@ -33,26 +33,14 @@ namespace Git.Repository
 	/// </summary>
 	public interface IConfiguration
 	{
-		string TemplatePath {
-			get;
-			set;
-		}
+		string TemplatePath { get; set; }
 		
-		string ConfigPath {
-			get;
-			set;
-		}
+		string ConfigPath { get; set; }
 		
 		// HEAD is always in the ConfigPath
-		string Head {
-			get;
-			set;
-		}
+		string Head { get; set; }
 		
 		// description is always in the ConfigPath
-		string Description {
-			get;
-			set;
-		}
+		string Description { get; set; }
 	}
 }

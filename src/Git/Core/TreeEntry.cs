@@ -27,7 +27,6 @@
 using System;
 using System.Text;
 using Git.Core;
-using Git.Repository;
 
 namespace Git.Core
 {
@@ -35,7 +34,7 @@ namespace Git.Core
 	/// Every Tree has entries, which are more trees and blobs, this is a
 	/// representation of a tree entry that can be another tree or a blob
 	/// </summary>
-	public struct TreeEntry
+	public class TreeEntry
 	{
 		private string name;
 		private GitFileMode mode;
