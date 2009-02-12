@@ -55,16 +55,19 @@ namespace Git.Core
 		// it represent the object uncompressed content
 		private byte[] content;
 		
+		// this means that every subclass need to return their type
 		public abstract Type Type { get; }
 		
+		// Objects are immutable that means after their are initialized they can't be changed
 		public SHA1 Id { get { return id; } }
 		public byte[] Content { get { return content; } }
 		
 		public Object (Type type, byte[] content)
 		{
-			// FIXME: ok, if we got a 0 length content(a blob), what we can do?
-			if (content.Length == 0 || content == null)
-				return;
+			// FIXME: ok, if we get a 0 length content(a blob), what we can do?, for now lets throw an exception
+			if (content.Length == 0 || content == null) {
+				throw new NotImplementedException ("Support for empty objects is not yet implemented sorry :(");
+			}
 			
 			byte[] header = CreateObjectHeader (type, content.Length.ToString ());
 			this.content = new byte[header.Length + content.Length];
