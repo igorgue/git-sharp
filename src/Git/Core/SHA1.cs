@@ -131,9 +131,10 @@ namespace Git.Core
 			byte[] result = new byte [hex.Length >> 1];
 			int n = 0;
 			int i = 0;
+			int resultLen = result.Length; // hack: uuuggg ugly
 			
 			// TODO: needs optimization
-			while (n < result.Length) {
+			while (n < resultLen) {
 				result [n] = (byte) (ToByte (hex [i++]) << 4);
 				result [n++] += ToByte (hex [i++]);
 			}
