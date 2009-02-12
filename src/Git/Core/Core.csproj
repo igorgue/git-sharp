@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7B3A5C9A-E259-425E-BB67-95E87D23D318}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Core</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Blob.cs" />
+    <Compile Include="BlobTreeEntry.cs" />
+    <Compile Include="Commit.cs" />
+    <Compile Include="Diff.cs" />
+    <Compile Include="GitFileMode.cs" />
+    <Compile Include="Index.cs" />
+    <Compile Include="IndexEntry.cs" />
+    <Compile Include="IndexHeader.cs" />
+    <Compile Include="Object.cs" />
+    <Compile Include="ObjectStore.cs" />
+    <Compile Include="Revision.cs" />
+    <Compile Include="SHA1.cs" />
+    <Compile Include="SymlinkTreeEntry.cs" />
+    <Compile Include="Tag.cs" />
+    <Compile Include="Tree.cs" />
+    <Compile Include="TreeEntry.cs" />
+    <Compile Include="User.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
