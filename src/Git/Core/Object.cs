@@ -76,21 +76,23 @@ namespace Git.Core
 			Array.Copy (header, 0, this.content, 0, header.Length); // Copying the header first
 			Array.Copy (content, 0, this.content, header.Length, content.Length); // then the data
 			
-			Console.WriteLine ("Length: " + this.content.Length);
-			foreach (char c in this.content) {
-				if (c == '\n') {
-					Console.WriteLine ("\\n");
-					continue;
-				}
-				if (c == '\0')
-					Console.Write ("[NULL]");
-				Console.Write (c);
-			}
+			// TODO: remove debugging stuff
+//			Console.WriteLine ("Length: " + this.content.Length);
+//			foreach (char c in this.content) {
+//				if (c == '\n') {
+//					Console.WriteLine ("\\n");
+//					continue;
+//				}
+//				if (c == '\0')
+//					Console.Write ("[NULL]");
+//				Console.Write (c);
+//			}
 			
 			// initializing the id with the content
 			id = new SHA1 (this.content, true);
-			
-			Console.WriteLine ("ID: " + id.ToHexString ());
+
+			// TODO: remove debugging stuff
+//			Console.WriteLine ("ID: " + id.ToHexString ());
 		}
 		
 		/// <summary>
@@ -108,8 +110,8 @@ namespace Git.Core
 		public static byte[] CreateObjectHeader (Type objType, string dataSize)
 		{
 			return Encoding.UTF8.GetBytes (String.Format ("{0} {1}\0",
-			                                                 Object.TypeToString (objType),
-			                                                 dataSize));
+			                                              Object.TypeToString (objType),
+			                                              dataSize));
 		}
 		
 		// These methods are to parse different objects from a input byte array
@@ -161,7 +163,7 @@ namespace Git.Core
 			if (input.Length == pos)
 				return false;
 			
-			while ((input [index] != (byte)'\n') && (input [index] != (byte)0))
+			while ((input[index] != (byte)'\n') && (input[index] != (byte)0))
 			{
 				if (index < input.Length) {
 					index++;
