@@ -35,7 +35,7 @@
     <Compile Include="TestDiff.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="res/" />
+    <Folder Include="res\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\config">

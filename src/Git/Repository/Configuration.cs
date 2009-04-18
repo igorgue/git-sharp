@@ -36,126 +36,40 @@ namespace Git.Repository
 	/// </summary>
 	public class Configuration : IConfiguration
 	{
-		private string head;
-		private string description;
-		private string path;
-		private string template_path;
-		private ConfigValue[] values;
+		string head;
+		string description;
+		string path;
+		string template;
+		ConfigEntry[] entries;
 		
-		public string Description
-		{
-			set {
-				description = value;
-			}
+		public string Head { get; set; }
+		
+		public string Description { get; set; }
+		
+		public string Path { get; set; }
+		
+		public string Template { get; set; }
+		
+		public ConfigEntry[] Entries {
 			get {
-				return description;
+				return entries;
 			}
 		}
 		
-		public string Head
+		public Configuration (string head, string description, string path, string template)
 		{
-			set {
-				head = value;
-			}
-			get {
-				return head;
-			}
-		}
-		
-		public string ConfigPath
-		{
-			set {
-				path = value;
-			}
-			get {
-				return path;
-			}
-		}
-		
-		public string TemplatePath
-		{
-			set {
-				template_path = value;
-			}
-			get {
-				return template_path;
-			}
-		}
-		
-		public ConfigValue[] Values
-		{
-			set {
-				values = value;
-			}
-			get {
-				return values;
-			}
-		}
-		
-		public Configuration ()
-		{
-		}
-		
-		public void AddConfigValues (string configPath)
-		{
-			path = configPath;
-			AddConfigValues ();
-		}
-		
-		public void AddConfigValues ()
-		{
-			string line = null;
-			string section = null;
+			// so if we don't pass null we asign it, if we do pass null or empty then we grab the default
+			this.head = String.IsNullOrEmpty (head) ? GetDefaultHead () : head;
+			this.description = String.IsNullOrEmpty (description) ? GetDefaultDescription () : description;
+			this.path = String.IsNullOrEmpty (path) ? GetDefaultConfigDir () : path;
+			this.template = String.IsNullOrEmpty (template) ? GetDefaultTemplateDir () : template;
 			
-			TextReader tr = new StreamReader (path);
+			// doing some validations
+			if (!Directory.Exists (this.path))
+				throw new ArgumentException (String.Format ("The provided path ({0}) of the git config doesn't exist", this.path));
 			
-			while ((line = tr.ReadLine()) != null) {
-				if (line.StartsWith ("[") && line.EndsWith ("]")) {
-					section = line;
-					line = tr.ReadLine ();
-				}
-				
-				// TODO: for now we are going to read the value and name as a whole
-				// the idea is:
-				//
-				// Remove all the text after "="(and "=" too) that's the name
-				// Remove all the text before "="(and "=" too) that's the value 
-				ConfigValue configValue = new ConfigValue (section, line, line);
-				
-				AddConfigValue (configValue);
-			}
-			
-			tr.Close ();
-		}
-		
-		public void AddConfigValue (string configSection, string configName, string configValue)
-		{
-			ConfigValue confValue = new ConfigValue (configSection, configName, configValue);
-			AddConfigValue (confValue);
-		}
-		
-		public void AddConfigValue (ConfigValue val)
-		{
-			if (values == null) {
-				values = new ConfigValue[0];
-				values[0] = val;
-			} else {
-				ConfigValue[] tmp = new ConfigValue[values.Length + 1];
-				
-				for (int i = 0; i < values.Length; i++)
-					tmp[i] = values[i];
-					
-				tmp[tmp.Length - 1] = new ConfigValue();
-				tmp[tmp.Length - 1] = val;
-				values = tmp;
-			}
-			
-			//ArrayList valuesArray = new ArrayList (values);
-			
-			//valuesArray.Add (val);
-			
-			//values = (ConfigValue[]) valuesArray.ToArray ();
-			//values[0] = val;
+			if (!Directory.Exists (this.template))
+				throw new ArgumentException (String.Format ("The provided path ({0}) of the git repo template doesn't exist", this.template));
 		}
 		
 		// These methods are used to get default configurations from C Git(mostly in UNIX systems)
@@ -179,6 +93,5 @@ namespace Git.Repository
 		{
 			return "Unnamed repository; edit this file to name it for gitweb.";
 		}
-		
 	}
 }

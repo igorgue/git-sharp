@@ -27,7 +27,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Configuration.cs" />
-    <Compile Include="ConfigValue.cs" />
+    <Compile Include="ConfigEntry.cs" />
     <Compile Include="IConfiguration.cs" />
     <Compile Include="Ref.cs" />
     <Compile Include="Repo.cs" />

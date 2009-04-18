@@ -65,6 +65,7 @@ namespace Git.Core
 		
 		public Revision ()
 		{
+			throw new NotImplementedException ();
 		}
 	}
 }

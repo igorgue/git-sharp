@@ -25,54 +25,37 @@
 //
 
 using System;
+using System.Collections.Generic;
 
 namespace Git.Repository
 {
-	public class ConfigValue
+	public class ConfigEntry
 	{
-		private string config_section;
-		private string config_name;
-		private string config_value;
+		string category;
+		string attribute;
+		string name;
+		string _value;
 		
-		public string Section
+		public string Category { get; set; }
+		
+		public string Attribute { get; set; }
+		
+		public string Name { get; set; }
+		
+		public string Value { get { return _value; } set { _value = value; } }
+		
+		public ConfigEntry (string category, string attribute, string name, string _value)
 		{
-			set {
-				config_section = value;
-			}
-			get {
-				return config_section;
-			}
+			this.category = category;
+			this.attribute = attribute;
+			this.name = name;
+			this._value = _value;
 		}
 		
-		public string Value
+		// FIXME: DOESNT make sense here ;)
+		public string GetValue (string query)
 		{
-			set {
-				config_value = value;
-			}
-			get {
-				return config_value;
-			}
-		}
-		
-		public string Name
-		{
-			set {
-				config_name = value;
-			}
-			get {
-				return config_name;
-			}
-		}
-		
-		public ConfigValue ()
-		{
-		}
-		
-		public ConfigValue (string confSection, string confName, string confValue)
-		{
-			config_section = confSection;
-			config_name = confName;
-			config_value = confValue;
+			string[] splitted = query.Split(new char[] {','});
 		}
 	}
 }

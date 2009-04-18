@@ -76,23 +76,8 @@ namespace Git.Core
 			Array.Copy (header, 0, this.content, 0, header.Length); // Copying the header first
 			Array.Copy (content, 0, this.content, header.Length, content.Length); // then the data
 			
-			// TODO: remove debugging stuff
-//			Console.WriteLine ("Length: " + this.content.Length);
-//			foreach (char c in this.content) {
-//				if (c == '\n') {
-//					Console.WriteLine ("\\n");
-//					continue;
-//				}
-//				if (c == '\0')
-//					Console.Write ("[NULL]");
-//				Console.Write (c);
-//			}
-			
 			// initializing the id with the content
 			id = new SHA1 (this.content, true);
-
-			// TODO: remove debugging stuff
-//			Console.WriteLine ("ID: " + id.ToHexString ());
 		}
 		
 		/// <summary>
@@ -218,7 +203,6 @@ namespace Git.Core
 			// FIXME: I'm getting an error if I don't asign these parameters, this is because
 			// I get out the method before asigned anything to those parameters
 			length = null;
-			//type = Type.Blob;
 			
 			// Here I get out of the method
 			if (!ParseType (input, ref pos, out type))
