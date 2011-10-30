@@ -37,7 +37,7 @@ namespace Git.Repository
 		private Configuration config;
 		private ObjectStore objects;
 		private Index index_file;
-		
+
 		public string Path
 		{
 			set {
@@ -47,7 +47,7 @@ namespace Git.Repository
 				return config.ConfigPath;
 			}
 		}
-		
+
 		public Configuration Config
 		{
 			set {
@@ -57,7 +57,7 @@ namespace Git.Repository
 				return config;
 			}
 		}
-		
+
 		public ObjectStore Objects
 		{
 			set {
@@ -67,7 +67,7 @@ namespace Git.Repository
 				return objects;
 			}
 		}
-		
+
 		public Index IndexFile
 		{
 			set {
@@ -77,17 +77,17 @@ namespace Git.Repository
 				return index_file;
 			}
 		}
-		
+
 		public Repo ()
 		{
 		}
-		
+
 		public Repo (Configuration conf)
 		{
 			config = conf;
 			//objects = new ObjectStore ();
 		}
-		
+
 		/// <summary>
 		/// Here we create a empty repository described here(in UNIX)
 		/// /usr/share/git-core/templates
@@ -97,28 +97,28 @@ namespace Git.Repository
 			bool reinit = false;
 			DirectoryInfo target = new DirectoryInfo (repoPath);
 			DirectoryInfo source = new DirectoryInfo (templatePath);
-			
+
 			if (target.Exists) {
 				reinit = true;
 				target.Delete (true); // we also delete subdirectories
 			}
-			
+
 			target.Create ();
-			
+
 			CopyAll (source, target);
-			
+
 			if (reinit) {
 				Console.WriteLine ("Reinitialized directory in {0}", repoPath);
 			} else {
 				Console.WriteLine ("Initialized directory in {0}", repoPath);
 			}
 		}
-		
+
 		public static void Init (Configuration config, string permissions)
 		{
 			Init (config.TemplatePath, config.ConfigPath, permissions);
 		}
-		
+
 		/// <summary>
 		/// Copy all the content of a directory to another
 		/// </summary>
@@ -134,12 +134,12 @@ namespace Git.Repository
 			if (target.Exists == false) {
 				target.Create ();
 			}
-			
+
 			// We copy each file from source to target
 			foreach (FileInfo fi in source.GetFiles ()) {
 				fi.CopyTo (System.IO.Path.Combine (target.ToString (), fi.Name), true);
 			}
-			
+
 			// Copy subdirs using.
 			foreach (DirectoryInfo sourceSubDir in source.GetDirectories ()) {
 				DirectoryInfo nextTargetSubDir = target.CreateSubdirectory (sourceSubDir.Name);

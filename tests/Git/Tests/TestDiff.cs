@@ -35,7 +35,7 @@ namespace Git.Tests
 		{
 			string a = "123";
 			string b = "1223";
-			
+
 			foreach (int i in Diff.DiffText (a, b, false, false, false))
 				Console.WriteLine ("item: {0}", i);
 		}

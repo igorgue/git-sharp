@@ -37,22 +37,22 @@ namespace Git.Tests
 		public RepositoryTest ()
 		{
 		}
-		
+
 		public void RepoInit ()
 		{
 			//Repo.Init ("/usr/share/git-core/templates", ".git", null);
 		}
-		
+
 //		public static bool ConfigurationTests ()
 //		{
 //			bool pass = false;
 //			Repo test = new Repo ();
-//			
+//
 //			test.Config = new Configuration ();
 //			test.Config.ConfigPath = "config";
 //			//test.Config.Values = new ConfigValue[1];
 //			test.Config.AddConfigValues ();
-//			
+//
 //			if (test.Config.Values == null)
 //				Console.WriteLine ("is null");
 //			//Console.WriteLine (test.Config.Values.Length.ToString ());
@@ -61,7 +61,7 @@ namespace Git.Tests
 //				Console.WriteLine (cf.Name);
 //				Console.WriteLine (cf.Value);
 //			}
-//			
+//
 //			return pass;
 //		}
 	}

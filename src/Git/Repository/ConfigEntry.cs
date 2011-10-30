@@ -35,15 +35,15 @@ namespace Git.Repository
 		string attribute;
 		string name;
 		string _value;
-		
+
 		public string Category { get; set; }
-		
+
 		public string Attribute { get; set; }
-		
+
 		public string Name { get; set; }
-		
+
 		public string Value { get { return _value; } set { _value = value; } }
-		
+
 		public ConfigEntry (string category, string attribute, string name, string _value)
 		{
 			this.category = category;
@@ -51,7 +51,7 @@ namespace Git.Repository
 			this.name = name;
 			this._value = _value;
 		}
-		
+
 		// FIXME: DOESNT make sense here ;)
 		public string GetValue (string query)
 		{

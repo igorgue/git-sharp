@@ -33,12 +33,12 @@ namespace Git.Core
 {
 	/// <summary>
 	/// Merge stage enumeration
-	/// 
+	///
 	/// Normal: It Doesn't need any merge (0)
 	/// Ancestor: Something is not ok(needs merge) (1)
 	/// Our: Our version (2)
 	/// Their: Their version (3)
-	/// 
+	///
 	/// A fully merged stage is always 0(Normal)
 	/// </summary>
 	public enum IndexStage
@@ -48,7 +48,7 @@ namespace Git.Core
 		Our,
 		Their
 	}
-	
+
 	public class Index
 	{
 		private IndexHeader header;
@@ -56,7 +56,7 @@ namespace Git.Core
 		private uint stage; // Merged in the constructor
 		private FileStream index_file;
 		private bool changed;
-		
+
 		public IndexEntry[] Entries
 		{
 			set {
@@ -66,7 +66,7 @@ namespace Git.Core
 				return entries;
 			}
 		}
-		
+
 		public uint Stage
 		{
 			set {
@@ -76,7 +76,7 @@ namespace Git.Core
 				return stage;
 			}
 		}
-		
+
 		public FileStream IndexFile
 		{
 			set {
@@ -86,7 +86,7 @@ namespace Git.Core
 				return index_file;
 			}
 		}
-		
+
 		public bool Changed
 		{
 			set {
@@ -96,7 +96,7 @@ namespace Git.Core
 				return changed;
 			}
 		}
-		
+
 		public IndexHeader Header
 		{
 			set {
@@ -106,84 +106,84 @@ namespace Git.Core
 				return header;
 			}
 		}
-		
+
 		public Index ()
 		{
 			Init ();
 		}
-		
+
 		public Index (string indexFilePath)
 		{
 			// Recreate the index file if it exist
 			if (File.Exists (indexFilePath))
 				File.Create (indexFilePath);
-			
+
 			Init ();
 		}
-		
+
 		public void Init ()
 		{
 			// FIXME: Here we should add the entries before using them
 			//header = new IndexHeader (entries);
 			stage = (uint) IndexStage.Normal;
 		}
-		
+
 		public void AddEntry (IndexEntry indexEntry)
 		{
 			ArrayList array = new ArrayList (entries);
-			
+
 			array.Add (indexEntry);
-			
+
 			entries = (IndexEntry[]) array.ToArray ();
 		}
-		
+
 		public void RemoveEntry (IndexEntry indexEntry)
 		{
 			ArrayList array = new ArrayList (entries);
-			
+
 			array.Remove (indexEntry);
-			
+
 			entries = (IndexEntry[]) array.ToArray ();
 		}
-		
+
 		public void ReadTree (Tree tree, Repo repo)
 		{
 			ReadTree ("", tree, repo);
 		}
-		
+
 		public void ReadTree (string prefix, Tree tree, Repo repo)
 		{
 			TreeEntry[] treeEntries = tree.Entries;
-			
+
 			foreach (TreeEntry te in treeEntries) {
 				string name;
-				
+
 				if (!String.IsNullOrEmpty (prefix))
 					name = String.Format ("{0}/{1}", prefix, te.Name);
 				else
 					name = te.Name;
-				
+
 //				if (te.IsTree (repo))
 //					ReadTree (name, tree, repo);
 			}
 		}
-		
+
 		public static IndexHeader GetHeader (BinaryReader br)
 		{
 			IndexHeader indexHeader = new IndexHeader ();
-			
+
 			indexHeader.Signature = br.ReadInt32 ();
 			indexHeader.Version = br.ReadInt32 ();
 			indexHeader.Entries = br.ReadInt32 ();
-			
+
 			//TODO:
 			return indexHeader;
 		}
-		
+
 		public static IndexEntry GetNextEntry (BinaryReader br)
 		{
 			IndexEntry entry = new IndexEntry ();
-			
+
 			// Content
 			Console.WriteLine (br.ReadInt32 ());
 			Console.WriteLine (br.ReadInt32 ());
@@ -195,7 +195,7 @@ namespace Git.Core
 			Console.WriteLine (br.ReadInt32 ());
 			Console.WriteLine (br.ReadInt32 ());
 			Console.WriteLine (br.ReadInt32 ());
-			
+
 			// SHA1 5x32 = 160
 			//??? Console.WriteLine (Git.Core.Object.BytesToHexString (br.ReadBytes (20)));
 			Console.WriteLine (br.ReadInt32 ());
@@ -203,19 +203,19 @@ namespace Git.Core
 			Console.WriteLine (br.ReadInt32 ());
 			Console.WriteLine (br.ReadInt32 ());
 			Console.WriteLine (br.ReadInt32 ());
-			
+
 			//entry = br.ReadInt16 (); // flag
 			Console.Write ("Characters: ");
-			
+
 			for (;;) {
 				char c = br.ReadChar ();
 				if (c == '\0')
 					break;
 				Console.Write (c);
 			}
-			
+
 			Console.Write ('\n');
-			
+
 			return entry;
 		}
 	}

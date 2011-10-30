@@ -34,45 +34,45 @@ namespace Git.Core
 		private int signature;
 		private int version;
 		private int entries;
-		
+
 		public int Signature {
 			get;
 			set;
 		}
-		
+
 		public int Version {
 			get;
 			set;
 		}
-		
+
 		public int Entries
 		{
 			get;
 			set;
 		}
-		
+
 		public IndexHeader ()
 		{
 			signature = 0x44495243;
 			version = 2;
 			//entries = indexEntries.Length;
 		}
-		
+
 		public IndexHeader (IndexEntry[] indexEntries)
 		{
 			signature = 0x44495243;
 			version = 2;
 			entries = indexEntries.Length;
 		}
-		
+
 		public FileStream Write (FileStream fs)
 		{
 			BinaryWriter bw = new BinaryWriter (fs);
-			
+
 			bw.Write (signature);
 			bw.Write (version);
 			bw.Write (entries);
-			
+
 			return fs;
 		}
 	}

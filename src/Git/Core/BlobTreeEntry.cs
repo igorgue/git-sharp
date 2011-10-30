@@ -32,25 +32,25 @@ namespace Git.Core
 	public class BlobTreeEntry : TreeEntry
 	{
 		private GitFileMode mode;
-		
-		public BlobTreeEntry (Tree myParent, SHA1 objId, string objName, bool exec) : 
+
+		public BlobTreeEntry (Tree myParent, SHA1 objId, string objName, bool exec) :
 			base (myParent, objId, objName)
 		{
 			SetExecutable (exec);
 		}
-		
+
 		public GitFileMode Mode { set; get; }
-		
+
 		public void SetExecutable (bool setExec)
 		{
 			mode = setExec ? GitFileMode.ExecutableFile : GitFileMode.RegularFile;
 		}
-		
+
 		public bool IsExecutable ()
 		{
 			return mode.Equals (GitFileModeTypes.ExecutableFile);
 		}
-		
+
 		public override string ToString ()
 		{
 			StringBuilder sb = new StringBuilder();
@@ -59,7 +59,7 @@ namespace Git.Core
 			sb.Append (IsExecutable () ? "X" : "F");
 			sb.Append (" ");
 			sb.Append (Name);
-			
+
 			return sb.ToString ();
 		}
 	}

@@ -47,7 +47,7 @@ namespace Git.Core
 		SymLink = 2,
 		Directory = 4
 	}
-	
+
 	[Flags]
 	public enum IndividualFileMode
 	{
@@ -59,7 +59,7 @@ namespace Git.Core
 		ReadWrite = 6,
 		All = 7
 	}
-	
+
 	public struct GitFileMode
 	{
 		private IndividualFileType file_type;
@@ -68,7 +68,7 @@ namespace Git.Core
 		private IndividualFileMode user;
 		private IndividualFileMode group;
 		private IndividualFileMode other;
-		
+
 		public GitFileMode (byte[] mode)
 		{
 			if ((char) mode[0] != '4') {
@@ -87,7 +87,7 @@ namespace Git.Core
 				other = (IndividualFileMode) mode[4] - 48;
 			}
 		}
-		
+
 		public byte[] ModeBits {
 			get {
 				if (file_type == IndividualFileType.Directory) {
@@ -96,15 +96,15 @@ namespace Git.Core
 				return new byte[] {(byte) (file_type + 48), (byte) (sym_link + 48), (byte) (zero + 48), (byte) (user + 48), (byte) (group + 48), (byte) (other + 48)};
 			}
 		}
-		
+
 		public override string ToString ()
 		{
 			if (file_type == IndividualFileType.Directory)
 				return String.Format ("0{0}{1}{2}{3}{4}", (uint) file_type, (uint) sym_link, (uint) user, (uint) group, (uint) other);
-			
+
 			return String.Format ("{0}{1}{2}{3}{4}{5}", (uint) file_type, (uint) sym_link, (uint) zero, (uint) user, (uint) group, (uint) other);
 		}
-		
+
 		public bool IsDirectory ()
 		{
 			return file_type == IndividualFileType.Directory;

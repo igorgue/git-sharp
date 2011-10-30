@@ -36,7 +36,7 @@ namespace Git.Tests
 				Console.WriteLine ("No argument provided");
 				return;
 			}
-			
+
 			switch (args[0]) {
 			case "blob":
 				new BlobTest ("a7efe6dbed6a3a0d73030134521c8b1048e6a7");
