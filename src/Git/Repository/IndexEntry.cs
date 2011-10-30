@@ -41,7 +41,7 @@ namespace Git.Core
 		private bool modified; // merged or not?
 		private SHA1 id; // ID
 		private string name; // whole path
-		
+
 		public int Ctime { get; set; }
 		public int Mtime { get; set; }
 		public int Dev { get; set; }
@@ -53,7 +53,7 @@ namespace Git.Core
 		public bool Modified { get; set; }
 		public SHA1 Id { get; set; }
 		public string Name { get; set; }
-		
+
 		public IndexEntry ()
 		{
 		}

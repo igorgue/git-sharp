@@ -30,28 +30,28 @@ using Git.Core;
 
 namespace Git.Tests
 {
-	
-	
+
+
 	public class IndexTest
 	{
-		
+
 		public IndexTest ()
 		{
 		}
-		
+
 		public static void IndexTest1 ()
 		{
 			//Index index = new Index ();
 			//IndexEntry iEntry = new IndexEntry ();
-			
+
 			FileStream fs = File.OpenRead (".git/index");
 			BinaryReader br = new BinaryReader (fs);
-			
+
 			// HEADER <- I hate you!!!
 			Console.WriteLine (br.ReadInt32 ());
 			Console.WriteLine (br.ReadInt32 ());
 			Console.WriteLine (br.ReadInt32 ());
-			
+
 			// Content
 			Console.WriteLine (br.ReadInt32 ());
 			Console.WriteLine (br.ReadInt32 ());
@@ -63,7 +63,7 @@ namespace Git.Tests
 			Console.WriteLine (br.ReadInt32 ());
 			Console.WriteLine (br.ReadInt32 ());
 			Console.WriteLine (br.ReadInt32 ());
-			
+
 			// SHA1 5x32 = 160
 			//??? Console.WriteLine (Git.Core.Object.BytesToHexString (br.ReadBytes (160)));
 			//Console.WriteLine (Git.Core.SHA1.BytesToHexString (br.ReadBytes (20)));
@@ -72,19 +72,19 @@ namespace Git.Tests
 //			Console.WriteLine (br.ReadInt32 ());
 //			Console.WriteLine (br.ReadInt32 ());
 //			Console.WriteLine (br.ReadInt32 ());
-			
+
 			Console.WriteLine (br.ReadInt16 ()); // flag
 			Console.Write ("Characters: ");
-			
+
 			for (;;) {
 				char c = br.ReadChar ();
 				if (c == '\0')
 					break;
 				Console.Write (c);
 			}
-			
+
 			Console.Write ('\n');
-			
+
 			br.Close ();
 			fs.Close ();
 		}

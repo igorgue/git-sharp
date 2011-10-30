@@ -38,14 +38,14 @@ namespace Git.Core
 	{
 		private byte[] data;
 		public byte[] Data { get { return data; } }
-		
+
 		public override Type Type { get { return Type.Blob; } }
-		
+
 		public Blob (byte[] data) : base (Type.Blob, data)
 		{
 			this.data = data;
 		}
-		
+
 		public bool IsText ()
 		{
 			// FIXME: Very silly implementation :(
@@ -54,35 +54,35 @@ namespace Git.Core
 					continue;
 				if (Char.IsLetterOrDigit (c) || Char.IsPunctuation (c) || Char.IsSymbol (c))
 					continue;
-				
+
 				return false;
 			}
-			
+
 			return true;
 		}
-		
+
 		public string GetText ()
 		{
 			if (IsText ())
 				return Encoding.UTF8.GetString (data);
-			
+
 			throw new FieldAccessException ("The data in this blob is not text");
 		}
-		
+
 		protected override byte[] Decode ()
 		{
 			return data;
 		}
-		
+
 		protected override void Encode (byte[] data)
 		{
 			MemoryStream ms = new MemoryStream (data);
-			
+
 			byte[] header;
 			int pos = 0;
-			
+
 			this.data = new byte[data.Length - pos];
-			
+
 			Array.Copy (data, pos - 1, this.data, 0, data.Length - pos);
 		}
 	}

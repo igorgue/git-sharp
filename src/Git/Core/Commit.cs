@@ -30,50 +30,50 @@ using System.Text;
 namespace Git.Core
 {
 	/// <summary>
-	/// 
+	///
 	/// </summary>
 	public class Commit : Object
 	{
 		private SHA1 parent; // Represent the parent commit
 		private SHA1 tree; // its the tree that you're commiting
-		
+
 		private User author; // initial author of the commit(inherited from parent)
 		private User commiter; // the commiter name
 		private string message; // message in the commit
-		
+
 		public override Type Type {
 			get {
 				return Type.Commit;
 			}
 		}
-		
+
 		public User Author { get { return author; } }
 		public User Commiter { get { return commiter; } }
 		public string Message { get { return message; } }
 		public SHA1 Tree { get { return tree; } }
 		public SHA1 Parent { get { return parent; } }
-		
+
 		public Commit (SHA1 treeId, SHA1 parentId, string authorName,
-		               string commiterName, string authorEmail, string commiterEmail, 
+		               string commiterName, string authorEmail, string commiterEmail,
 		               string messageContent) : base (Type.Commit, Encoding.UTF8.GetBytes (authorName)) // TODO: ENCODE
 		{
 			tree = treeId;
 			parent = parentId;
-			
+
 			author.Name = authorName;
 			author.Email = authorEmail;
-			
+
 			commiter.Name = commiterName;
 			commiter.Name = commiterEmail;
-			
+
 			message = messageContent;
 		}
-		
+
 		protected override byte[] Decode ()
 		{
 			throw new NotImplementedException ();
 		}
-		
+
 		protected override void Encode (byte[] content)
 		{
 			throw new NotImplementedException ();

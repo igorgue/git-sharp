@@ -33,20 +33,20 @@ namespace Git.Core
 	{
 		private string name;
 		private string email;
-		
+
 		public string Name { set; get; }
 		public string Email { set; get; }
-		
+
 		public User ()
 		{
 		}
-		
+
 		public User (string n, string e)
 		{
 			name = n;
 			email = e;
 		}
-		
+
 		public override string ToString ()
 		{
 			return String.Format ("{0} {1}", name, email);

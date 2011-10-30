@@ -41,21 +41,21 @@ namespace Git.Repository
 		string path;
 		string template;
 		ConfigEntry[] entries;
-		
+
 		public string Head { get; set; }
-		
+
 		public string Description { get; set; }
-		
+
 		public string Path { get; set; }
-		
+
 		public string Template { get; set; }
-		
+
 		public ConfigEntry[] Entries {
 			get {
 				return entries;
 			}
 		}
-		
+
 		public Configuration (string head, string description, string path, string template)
 		{
 			// so if we don't pass null we asign it, if we do pass null or empty then we grab the default
@@ -63,32 +63,32 @@ namespace Git.Repository
 			this.description = String.IsNullOrEmpty (description) ? GetDefaultDescription () : description;
 			this.path = String.IsNullOrEmpty (path) ? GetDefaultConfigDir () : path;
 			this.template = String.IsNullOrEmpty (template) ? GetDefaultTemplateDir () : template;
-			
+
 			// doing some validations
 			if (!Directory.Exists (this.path))
 				throw new ArgumentException (String.Format ("The provided path ({0}) of the git config doesn't exist", this.path));
-			
+
 			if (!Directory.Exists (this.template))
 				throw new ArgumentException (String.Format ("The provided path ({0}) of the git repo template doesn't exist", this.template));
 		}
-		
+
 		// These methods are used to get default configurations from C Git(mostly in UNIX systems)
 		public static string GetDefaultHead ()
 		{
 			return "ref: refs/heads/master";
 		}
-		
+
 		public static string GetDefaultTemplateDir ()
 		{
 			// FIXME: So UNIX name, not right for multiplatform
 			return "/usr/share/git-core/templates";
 		}
-		
+
 		public static string GetDefaultConfigDir ()
 		{
 			return ".git";
 		}
-		
+
 		public static string GetDefaultDescription ()
 		{
 			return "Unnamed repository; edit this file to name it for gitweb.";
