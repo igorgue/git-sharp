@@ -29,37 +29,37 @@ using System.Text;
 
 namespace Git.Core
 {
-	
+
 	/// <summary>
 	/// Struct that represent a SHA1 hash
 	/// </summary>
 	public struct SHA1
 	{
 		private byte[] bytes;
-		
+
 		public byte[] Bytes { get { return bytes; } }
-		
+
 		public SHA1 (byte[] data, bool calculateHash)
 		{
 			if (calculateHash) {
 				bytes = ComputeSHA1Hash (data);
 				return;
 			}
-			
+
 			if (data.Length == 20) {
 				bytes = data;
 				return;
 			}
-			
+
 			throw new ArgumentException (String.Format ("The data provided is not a SHA1 hash, the lenght was {0} and it has to be 20", data.Length));
 		}
-		
+
 		public override int GetHashCode ()
 		{
 			// weird maths :S
 			return ((int)bytes[0]) | (((int)bytes[1]) << 8) | (((int)bytes[2]) << 16) | (((int)bytes[3]) << 24);
 		}
-		
+
 		/// <summary>
 		/// Compute the byte array to a SHA1 hash
 		/// </summary>
@@ -73,7 +73,7 @@ namespace Git.Core
 		{
 			return System.Security.Cryptography.SHA1.Create ().ComputeHash (bytes);
 		}
-		
+
 		/// <summary>
 		/// Convert a Byte array to Hexadecimal format
 		/// </summary>
@@ -84,32 +84,32 @@ namespace Git.Core
 		{
 			// Final length of the string will have 2 chars for every byte
 			StringBuilder hexString = new StringBuilder (size * 2);
-			
+
 			for (int i = start; i < size; i++)
 				hexString.Append (bytes[i].ToString ("x2"));
-			
+
 			return hexString.ToString ();
 		}
-		
+
 		public string ToHexString ()
 		{
 			return ToHexString (0, 20);
 		}
-		
+
 		public string GetGitFileName ()
 		{
 			return ToHexString (0, 1) + "/" + ToHexString (1, bytes.Length);
 		}
-		
+
 		public bool Equals (SHA1 o)
 		{
 			if (bytes == o.Bytes)
 				return true;
-			
+
 			return bytes.Equals (o.Bytes);
 		}
-		
-		private static byte ToByte (char c) 
+
+		private static byte ToByte (char c)
 		{
 			if ((c >= 'a') && (c <= 'f'))
 				return (byte) (c - 'a' + 10);
@@ -117,22 +117,22 @@ namespace Git.Core
 				return (byte) (c - 'A' + 10);
 			if ((c >= '0') && (c <= '9'))
 				return (byte) (c - '0');
-			
+
 			throw new ArgumentException ("Invalid hex char");
 		}
-		
-		public static byte[] ToBytes (string hex) 
+
+		public static byte[] ToBytes (string hex)
 		{
 			if (String.IsNullOrEmpty (hex))
 				throw new ArgumentException ("A null or empty string was passed, can't convert that to bytes");
 			if ((hex.Length & 0x1) == 0x1)
 				throw new ArgumentException ("The Length must be a multiple of 2");
-			
+
 			byte[] result = new byte [hex.Length >> 1];
 			int n = 0;
 			int i = 0;
 			int resultLen = result.Length; // hack: uuuggg ugly
-			
+
 			// TODO: needs optimization
 			while (n < resultLen) {
 				result [n] = (byte) (ToByte (hex [i++]) << 4);

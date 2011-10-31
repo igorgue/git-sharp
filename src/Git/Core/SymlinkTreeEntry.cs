@@ -32,25 +32,25 @@ namespace Git.Core
 	public class SymlinkTreeEntry : TreeEntry
 	{
 		GitFileMode mode;
-		
-		public SymlinkTreeEntry (Tree myParent, SHA1 objId, string objName, bool exec) : 
+
+		public SymlinkTreeEntry (Tree myParent, SHA1 objId, string objName, bool exec) :
 			base (myParent, objId, objName)
 		{
 			mode = GitFileMode.Symlink;
 		}
-		
+
 		public GitFileMode GetFileMode ()
 		{
 			return mode;
 		}
-		
+
 //		public override string ToString ()
 //		{
 //			StringBuilder sb = new StringBuilder ();
 //			sb.Append (Object.BytesToHexString (Id.bytes));
 //			sb.Append (" S ");
 //			sb.Append (Name);
-//			
+//
 //			return sb.ToString ();
 //		}
 	}

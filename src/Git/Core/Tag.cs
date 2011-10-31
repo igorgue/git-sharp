@@ -38,13 +38,13 @@ namespace Git.Core
 		private Commit commit;
 		private string tag;
 		private string message;
-		
+
 		public override Type Type { get { return Type.Tag; } }
 		public User Tagger { get { return tagger; } }
 		public string TagString { get { return tag; } }
 		public string Message { get { return message; } }
 		public Commit Commit { get { return commit; } }
-		
+
 		public Tag (string tag, User tagger, string message, Commit commit) : base (Type.Tag, Encoding.UTF8.GetBytes (tag)) // TODO: add a real encoding
 		{
 			this.tag = tag;
@@ -52,12 +52,12 @@ namespace Git.Core
 			this.message = message;
 			this.commit = commit;
 		}
-		
+
 		protected override byte[] Decode ()
 		{
 			throw new NotImplementedException ();
 		}
-		
+
 		protected override void Encode (byte[] content)
 		{
 			throw new NotImplementedException ();

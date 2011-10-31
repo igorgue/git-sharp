@@ -46,7 +46,7 @@ namespace Git.Core
 		Boundary,
 		Parents,
 	}
-	
+
 	public enum DiffFlags : uint
 	{
 		Diff,
@@ -59,10 +59,10 @@ namespace Git.Core
 		DenseCombinedMerges,
 		AlwaysShowHeader,
 	}
-	
+
 	public class Revision
 	{
-		
+
 		public Revision ()
 		{
 			throw new NotImplementedException ();
